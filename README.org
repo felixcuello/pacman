@@ -1,6 +1,6 @@
 * Introduction
 
-This is my solution to the PacMan problem.
+This is my solution to the PacMan problem orginally described in the [[README.original.org][README.md]].
 
 #+attr_org: :width WIDTH
 [[file:/farmer.jpeg]]
