@@ -2,4 +2,33 @@
 
 This is my solution to the PacMan problem.
 
+#+ATTR_ORG: :width 100
 [[./farmer.jpeg]]
+
+
+* Setup
+** Make
+In order to automate things and to make things simpler for the developers I use the good ol' ```make``` command, available in most *nix systems.
+
+
+** Docker
+In order to execute the application without polluting your system with gems or ruby versions, I have created a docker container that basically let you do everything inside.
+
+To build the container you can run:
+
+```
+make build
+```
+
+Or if you run to build the container and run a shell inside you can do:
+
+```
+make
+```
+
+* TestShell
+The testshell is the way you can access the container without building it again, and you can do that by running:
+
+```
+make testshell
+```
