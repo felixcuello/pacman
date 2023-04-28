@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  pacmapp:
+    platform: linux/amd64
+    build:
+      context: ./pacmapp/
+      dockerfile: Dockerfile
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL}
+    env_file:
+      - .env
+    volumes:
+      - ./pacmapp:/app
