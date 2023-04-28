@@ -2,13 +2,13 @@
 
 This is my solution to the PacMan problem.
 
-#+ATTR_ORG: :width 100
-[[./farmer.jpeg]]
+#+attr_org: :width WIDTH
+[[file:/farmer.jpeg]]
 
 
 * Setup
 ** Make
-In order to automate things and to make things simpler for the developers I use the good ol' ```make``` command, available in most *nix systems.
+In order to automate things and to make things simpler for the developers I use the good ol' make command, available in most *nix systems.
 
 
 ** Docker
@@ -16,19 +16,21 @@ In order to execute the application without polluting your system with gems or r
 
 To build the container you can run:
 
-```
+#+BEGIN_SRC bash
 make build
-```
+#+END_SRC
+
 
 Or if you run to build the container and run a shell inside you can do:
 
-```
+#+BEGIN_SRC bash
 make
-```
+#+END_SRC
+
 
 * TestShell
-The testshell is the way you can access the container without building it again, and you can do that by running:
 
-```
+The testshell is the way you can access the container without building it again, and you can do that by running:
+#+BEGIN_SRC bash
 make testshell
-```
+#+END_SRC
