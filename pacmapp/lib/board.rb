@@ -36,6 +36,8 @@ module Lib
 
       check_walls_position!(walls_set)
       @walls = walls_set
+
+      @pacman_status_invalid = false
     end
 
     #  Returns true if the position is inside the board
@@ -65,8 +67,16 @@ module Lib
     #  Moves the pacman to that particular position
     # ------------------------------------------------------
     def move_pacman(new_col_x, new_row_y)
-      return if wall_at?(new_col_x, new_row_y) # Pac-Man cannot move into a wall
-      return unless inside?(new_col_x, new_row_y) # Pac-Man cannot move outside the board
+      return if @pacman_status_invalid # Pacman is invalid
+
+      # Pac-Man cannot move into a wall / Pac-Man cannot move outside the board
+      # Invalid movements generate the next movements to be rejected
+      if wall_at?(new_col_x, new_row_y) || !inside?(new_col_x, new_row_y)
+        @pacman_status_invalid = true
+        @pacman.col_x = @pacman.row_y = -1
+        @coins_eaten = Set.new([])
+        return
+      end
 
       @pacman.move_to(new_col_x, new_row_y)
 
@@ -81,6 +91,12 @@ module Lib
     # ------------------------------------------------------
     def coins_eaten
       @coins_eaten.size
+    end
+
+    #  Returns the number of eaten coins
+    # ------------------------------------------------------
+    def pacman_final_location
+      [@pacman.col_x, @pacman.row_y, coins_eaten]
     end
 
     #  Returns a printable board
