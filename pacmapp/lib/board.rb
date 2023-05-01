@@ -104,7 +104,7 @@ module Lib
     def show
       (@size_y - 1).downto(0) do |row_y|
         @size_x.times do |col_x|
-          print ' ' if col_x > 0
+          print ' ' if col_x.positive?
           if wall_at?(col_x, row_y)
             print Wall::REPRESENTATION
           elsif pacman_at?(col_x, row_y)
@@ -145,7 +145,7 @@ module Lib
     #  Check the pacman position on the board
     # ------------------------------------------------------
     def check_pacman_position!(pacman)
-      raise InvalidBoardException('Pac-Man must be inside the board') unless inside?(pacman.col_x, pacman.row_y)
+      raise InvalidBoard.new('Pac-Man must be inside the board') unless inside?(pacman.col_x, pacman.row_y)
     end
 
     #  Check the pacman position on the board

@@ -9,7 +9,7 @@ describe 'The Pac-Man Game' do
     # . @ # . .
     # . . . . .
     # . # . . .
-    let(:sample_pacman_game) { '5 5 1 2 NNESEESWNWW 1 0 2 2 2 3' }
+    let(:sample_pacman_game) { "5 5\n1 2\nNNESEESWNWW\n1 0\n2 2\n2 3" }
 
     before do
       allow_any_instance_of(Lib::Game).to receive(:read_pacman_game).and_return(sample_pacman_game)
@@ -39,7 +39,18 @@ describe 'The Pac-Man Game' do
     # # # # # #
     # # # # # #
     # @ # # # #
-    let(:sample_pacman_game) { '5 5 0 0 NSEWNSEWNSEW 1 0 2 0 3 0 4 0 0 1 1 1 2 1 3 1 4 1 0 2 1 2 2 2 3 2 4 2 0 3 1 3 2 3 3 3 4 3 0 4 1 4 2 4 3 4 4 4' }
+    let(:sample_pacman_game) do
+      [
+        '5 5',
+        '0 0',
+        'NSEWNSEWNSEW',
+        '1 0', '2 0', '3 0', '4 0',
+        '0 1', '1 1', '2 1', '3 1', '4 1',
+        '0 2', '1 2', '2 2', '3 2', '4 2',
+        '0 3', '1 3', '2 3', '3 3', '4 3',
+        '0 4', '1 4', '2 4', '3 4', '4 4'
+      ].join("\n")
+    end
 
     before do
       allow_any_instance_of(Lib::Game).to receive(:read_pacman_game).and_return(sample_pacman_game)
@@ -69,7 +80,7 @@ describe 'The Pac-Man Game' do
     # . . . . .
     # . . . . .
     # @ . . . .
-    let(:sample_pacman_game) { '5 5 0 0 NNNNNESSSSSENNNNNESSSSSENNNNN' }
+    let(:sample_pacman_game) { "5 5\n0 0\nNNNNNESSSSSENNNNNESSSSSENNNNN" }
 
     before do
       allow_any_instance_of(Lib::Game).to receive(:read_pacman_game).and_return(sample_pacman_game)

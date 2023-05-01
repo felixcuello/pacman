@@ -23,12 +23,11 @@ module Lib
     def initialize(pacman_game_file)
       parsed_file = parse_pacman_game_file(pacman_game_file)
 
-      walls_set = parse_walls(parsed_file[:walls])
       pacman = Pacman.new(col_x: parsed_file[:pacman_col_x], row_y: parsed_file[:pacman_row_y])
       @board = Board.new(size_x: parsed_file[:board_size_x],
                          size_y: parsed_file[:board_size_y],
                          pacman: pacman,
-                         walls_set: walls_set)
+                         walls_set: parsed_file[:walls])
       @pacman_movements = parsed_file[:pacman_movements]
     end
 
@@ -57,28 +56,6 @@ module Lib
 
     private
 
-    #  Parses the walls list into a pair of coordinates lists
-    # ------------------------------------------------------
-    #  Returns a set of coordinates
-    def parse_walls(walls_list = [])
-      walls_list_size = walls_list.size
-      raise InvalidBoardException('The number of walls coordinates are odd') if walls_list_size.odd?
-
-      # This is to avoid duplicates
-      walls = Set.new
-
-      i = 0
-      while i < walls_list_size
-        wall_col_x = walls_list[i]
-        wall_row_y = walls_list[i + 1]
-
-        walls.add([wall_col_x, wall_row_y])
-        i += 2
-      end
-
-      walls
-    end
-
     #  Reads the pacman game file
     # ------------------------------------------------------
     def read_pacman_game(pacman_game_file)
@@ -91,17 +68,20 @@ module Lib
     #  Parses the pacman file
     # ------------------------------------------------------
     def parse_pacman_game_file(pacman_game_file)
-      pacman_game = read_pacman_game(pacman_game_file)
-                      .strip
-                      .split(/\s+/)
+      pacman_game_definition = read_pacman_game(pacman_game_file)
+                               .split(/\r?\n/)
+                               .map(&:strip)
+
+      board_size = pacman_game_definition[0].split(/\s+/).map(&:to_i)
+      pacman_initial_position = pacman_game_definition[1].split(/\s+/).map(&:to_i)
 
       {
-        board_size_x: pacman_game[0].to_i,
-        board_size_y: pacman_game[1].to_i,
-        pacman_col_x: pacman_game[2].to_i,
-        pacman_row_y: pacman_game[3].to_i,
-        pacman_movements: pacman_game[4].to_s.split(''),
-        walls: pacman_game[5..].map(&:to_i)
+        board_size_x: board_size[0],
+        board_size_y: board_size[1],
+        pacman_col_x: pacman_initial_position[0],
+        pacman_row_y: pacman_initial_position[1],
+        pacman_movements: pacman_game_definition[2].split(''),
+        walls: Set.new(pacman_game_definition[3..].map { |w| w.split(/\s+/).map(&:to_i) })
       }
     end
   end
