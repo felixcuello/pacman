@@ -26,7 +26,17 @@ Or if you don't specify anything, the container is going to be built and the spe
 #+BEGIN_SRC bash
 make
 #+END_SRC
+* Run
+To run the sample input, just use:
+#+BEGIN_SRC bash
+make
+#+END_SRC
 
+or if you don't want to build the container every time, try:
+
+#+BEGIN_SRC bash
+make up
+#+END_SRC
 
 * TestShell
 
@@ -34,3 +44,41 @@ The testshell is the way you can access the container without building it again,
 #+BEGIN_SRC bash
 make testshell
 #+END_SRC
+
+* Tests
+The tests can be run inside the container or just by running:
+#+BEGIN_SRC bash
+make test
+#+END_SRC
+
+* What could have been done better?
+** Objects
+There's some coupling between the board and the objects. Also with the game and the board.
+I should have created a Rules class that would manage the board and the pieces.
+** Specs
+Probably I should have used factories or stubs (perhaps) to create the objects (e.g. board) instead of hardcoding them.
+** Logging
+I have started doing a LOG_LEVEL but yet I haven't used it, I was thinking to use a logger, so I can send to the STDERR messages like DEBUG, INFO, WARNINGS, ERRORS instead of just puts.
+** Git
+I started the project and didn't commit until I finished it. Since there weren't modifications and I wanted to finish it ASAP, I coded and tested until it worked. I should have split into non-working commits in a different branch until the software was completed.
+
+* Final thoughts about this interview process?
+** PROs
+*** Concise Project
+It was a very concise project. Easy to understand.
+*** Wikipedia links
+It's very nice to have wikipedia links to understand the concepts
+*** Relevant to the Job
+This is typically the things you have to do when you write a complete new feature
+*** Fun project
+I think it's a fun project
+** CONs
+*** A bit long
+I think it's a bit long. Perhaps it would be better to have a shorter problem, but a bit more challenging in terms of algorithms or the problem that has to solve.
+*** Cartesian Coordinates is a bit confusing
+Usually screens are "upside-down" , so the (0,0) position use to be the upper-left corner, not the lower-left corner as in math.
+*** x and y
+X and Y are usually confusing in code, that's why I used (col_x, row_y) everywhere. Because it's usually better to refer columns as col instead of X, and rows as row instead of Y.
+This is a good recommendation I got from the book "Cracking The Coding Interview"
+*** The spec was for python
+Not really a con, but it would be better if isn't python specific.
