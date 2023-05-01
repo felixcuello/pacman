@@ -125,10 +125,12 @@ module Lib
     #  Return the stats of the game
     # ------------------------------------------------------
     def show_stats
+      pacman_x, pacman_y, coins_eaten = pacman_final_location
+
       puts ''
       puts '--- STATS'
-      puts "Pac-Man position = [#{@pacman.col_x},#{@pacman.row_y}]"
-      puts "Eaten coins = #{@coins_eaten.size}"
+      puts "Pac-Man position = [#{pacman_x},#{pacman_y}]"
+      puts "Eaten coins = #{coins_eaten}"
       puts '---'
     end
 
