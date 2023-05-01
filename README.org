@@ -20,12 +20,6 @@ To build the container you can run:
 make build
 #+END_SRC
 
-
-Or if you don't specify anything, the container is going to be built and the specs are going to be ran:
-
-#+BEGIN_SRC bash
-make
-#+END_SRC
 * Run
 To run the sample input, just use:
 #+BEGIN_SRC bash
